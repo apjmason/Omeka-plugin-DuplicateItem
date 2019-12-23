@@ -1,0 +1,19 @@
+document.addEventListener('DOMContentLoaded', function() {
+  var paragraphs = document.getElementsByClassName('dash-edit');
+	for (i=0; i < paragraphs.length; i++) {
+	  var links = paragraphs[i].children;
+		for (ii=0; ii < links.length; ii++) {
+		  if (links[ii].href.indexOf('/items/edit/') > 0) {
+			  var cln = links[ii].cloneNode(true);
+				cln.innerHTML = '" . __('Duplicate') . "';
+				cln.href = cln.href.replace('items/edit', 'items/duplicate');
+				links[ii].parentNode.insertBefore(cln, links[ii].nextSibling);
+								
+				var textNode = document.createTextNode(' · ');
+				links[ii].parentNode.insertBefore(textNode, links[ii].nextSibling);
+				
+				break;
+			}
+		}	
+	}
+}, false);
